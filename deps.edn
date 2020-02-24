@@ -1,0 +1,9 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojurescript {:mvn/version "1.10.597"}}
+ :aliases {:pack
+           {:extra-deps
+            {pack/pack.alpha
+             {:git/url "https://github.com/juxt/pack.alpha.git"
+              :sha "60cdf0e75efc988b893eafe726ccdf0d5a5a6067"}}
+            :main-opts ["-m"]}}}
