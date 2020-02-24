@@ -18,12 +18,12 @@ But it is likely useful with other ClojureScript environments also.
 ----
 :tests [{…
          :cljs/repl-env io.dominic.delegating-repl.core/repl-env
-	 :cljs/compiler-options
-	 {:io.dominic.delegating-repl/repl-env cljs.repl.browser/repl-env
-	  ;; Don't create visible GUI, prevent stealing focus.
-	  :launch-command ["chrome" "--silent-launch" "http://localhost:9000"]
-	  ;; Do create a visible tab, but don't worry, it won't block.
-	  :launch-command ["chrome" "http://localhost:9000"]
-	  ;; Prevent cljs.repl.browser from starting a browser.
-	  :launch-browser false}}]
+         :cljs/compiler-options
+         {:io.dominic.delegating-repl/repl-env cljs.repl.browser/repl-env
+          ;; Don't create visible GUI, prevent stealing focus.
+          :launch-command ["chrome" "--silent-launch" "http://localhost:9000"]
+          ;; Do create a visible tab, but don't worry, it won't block.
+          :launch-command ["chrome" "http://localhost:9000"]
+          ;; Prevent cljs.repl.browser from starting a browser.
+          :launch-browser false}}]
 ----
