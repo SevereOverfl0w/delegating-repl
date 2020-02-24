@@ -1,0 +1,29 @@
+= Delegating ClojureScript REPL
+
+image::https://img.shields.io/clojars/v/io.dominic/delegating-repl.svg[Clojars Project, link=https://clojars.org/io.dominic/delegating-repl, opts=interactive]
+
+This is a ClojureScript REPL which simply delegates to another.
+By wrapping another REPL in this way, we can add useful actions around certain parts of the lifecycle.
+
+The only feature supported now is `:launch-command`, which is an alternative to the `:launch-browser` option in the browser repl where you choose how to launch.
+The `:launch-command` is also run on a separate thread in order to avoid it holding up the launch of your tests.
+
+This is most useful with https://github.com/lambdaisland/kaocha-cljs[kaocha-cljs] due to https://clojure.atlassian.net/browse/CLJ-2493[CLJ-2493].
+But it is likely useful with other ClojureScript environments also.
+
+== Example Kaocha use
+
+[source,clojure]
+.tests.edn
+----
+:tests [{…
+         :cljs/repl-env io.dominic.delegating-repl.core/repl-env
+	 :cljs/compiler-options
+	 {:io.dominic.delegating-repl/repl-env cljs.repl.browser/repl-env
+	  ;; Don't create visible GUI, prevent stealing focus.
+	  :launch-command ["chrome" "--silent-launch" "http://localhost:9000"]
+	  ;; Do create a visible tab, but don't worry, it won't block.
+	  :launch-command ["chrome" "http://localhost:9000"]
+	  ;; Prevent cljs.repl.browser from starting a browser.
+	  :launch-browser false}}]
+----
